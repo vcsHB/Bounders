@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - WALL
+  - TARGET
+  - GOOD_ITEM
+  - BAD_ITEM
+  - CrashMode
   layers:
   - Default
   - TransparentFX
@@ -13,11 +18,11 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
+  - Player
   - Ground
-  - Environment
-  - Track
-  - CrashObject
+  - Wall
+  - Ball
+  - Object
   - Kart
   - TrainingCheckpoints
   - 

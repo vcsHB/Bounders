@@ -369,6 +369,7 @@ MonoBehaviour:
   MaxStep: 0
   enemy: {fileID: 4656066083302287733}
   ball: {fileID: 363115109321992463}
+  _isLearningMode: 1
 --- !u!1 &4656066083302287733
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +554,7 @@ MonoBehaviour:
   MaxStep: 0
   enemy: {fileID: 1989970401020594516}
   ball: {fileID: 363115109321992463}
+  _isLearningMode: 1
 --- !u!1 &4706293147511360008
 GameObject:
   m_ObjectHideFlags: 0

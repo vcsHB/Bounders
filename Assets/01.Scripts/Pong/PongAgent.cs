@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -18,6 +16,7 @@ public class PongAgent : Agent
     private const int Down = 2;
 
     private Vector3 ResetPosAgent;
+    [SerializeField] private bool _isLearningMode;
 
     public override void Initialize()
     {
@@ -25,7 +24,8 @@ public class PongAgent : Agent
         RbAgent = GetComponent<Rigidbody>();
         RbBall = ball.GetComponent<Rigidbody>();
 
-        Academy.Instance.AgentPreStep += WaitTimeInference;
+        if (_isLearningMode)
+            Academy.Instance.AgentPreStep += WaitTimeInference;
 
     }
 
@@ -87,9 +87,9 @@ public class PongAgent : Agent
         }
     }
 
-    float DecisionWaitingTime = 0.02f;
+    float DecisionWaitingTime = 0.05f;
     float m_currentTime = 0f;
-
+    // mlagents-learn D:\_UnitySave\GitHub\Bounders\ml-agents-release_20\config\poca\Pong.yaml --run-id=pong_run1 --force
     public void WaitTimeInference(int action)
     {
         if (Academy.Instance.IsCommunicatorOn)
@@ -108,16 +108,12 @@ public class PongAgent : Agent
             {
                 m_currentTime += Time.fixedDeltaTime;
             }
-
-
         }
 
-
-
     }
 
 
 
 
 
-    }
+}
