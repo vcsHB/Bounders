@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 61e7b2fea5212d3409369bcfaa2309dc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _spriteRenderer: {instanceID: 0}
+  - _blinkMaterial: {fileID: 2100000, guid: abffbb0150a1dad4fb62f23074fcaea3, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
