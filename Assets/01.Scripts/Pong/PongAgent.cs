@@ -41,26 +41,57 @@ public class PongAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        var vectorAction = actions.DiscreteActions;
-        int action = Mathf.FloorToInt(vectorAction[0]);
+        Vector3 ballPos = ball.transform.localPosition;
+        Vector3 ballVel = RbBall.velocity;
+        Vector3 agentPos = transform.localPosition;
 
-        switch (action)
+        // 공이 나에게 오는 방향인지 확인
+        bool ballApproaching = (transform.localPosition.x < 0 && ballVel.x < 0) ||
+                               (transform.localPosition.x > 0 && ballVel.x > 0);
+
+        float predictedZ = ballPos.z;
+
+        // 공이 일정 속도 이상이고 나에게 오고 있다면 예측
+        if (ballApproaching && Mathf.Abs(ballVel.x) > 0.1f)
         {
-            case Stay:
-                transform.localPosition = transform.localPosition;
-                break;
-            case Up:
-                transform.Translate(Vector3.forward * Time.fixedDeltaTime * 30f);
-                transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y,
-                    Mathf.Clamp(transform.localPosition.z, -3.7f, 3.7f));
-                break;
-            case Down:
-                transform.Translate(Vector3.back * Time.fixedDeltaTime * 30f);
-                transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y,
-                    Mathf.Clamp(transform.localPosition.z, -3.7f, 3.7f));
-                break;
+            // 단순 직선 예측 (벽 반사 없이)
+            float timeToReach = Mathf.Abs((agentPos.x - ballPos.x) / ballVel.x);
+            predictedZ = ballPos.z + ballVel.z * timeToReach;
+
+            // 벽에 부딪혔을 때 반사 고려 (3.7 높이 기준)
+            while (predictedZ > 3.7f || predictedZ < -3.7f)
+            {
+                if (predictedZ > 3.7f)
+                    predictedZ = 3.7f - (predictedZ - 3.7f);
+                else if (predictedZ < -3.7f)
+                    predictedZ = -3.7f + (-3.7f - predictedZ);
+            }
         }
 
+        // 현재 z좌표와 예측 z좌표 비교
+        float diff = predictedZ - agentPos.z;
+
+        float moveThreshold = 0.1f;
+
+        if (Mathf.Abs(diff) < moveThreshold)
+        {
+            // Stay
+            transform.localPosition = transform.localPosition;
+        }
+        else if (diff > 0)
+        {
+            // Move Up
+            transform.Translate(Vector3.forward * Time.fixedDeltaTime * 30f);
+        }
+        else
+        {
+            // Move Down
+            transform.Translate(Vector3.back * Time.fixedDeltaTime * 30f);
+        }
+
+        // Clamp z축 이동
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y,
+            Mathf.Clamp(transform.localPosition.z, -3.7f, 3.7f));
     }
 
     public override void OnEpisodeBegin()

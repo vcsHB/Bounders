@@ -276,7 +276,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.5, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 3}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 27857887}
@@ -578,11 +578,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PongEnv
       objectReference: {fileID: 0}
-    - target: {fileID: 1337573613846254202, guid: 361da03ade5848c41b29663af784a1b4,
-        type: 3}
-      propertyPath: _isLearningMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1622587487965570605, guid: 361da03ade5848c41b29663af784a1b4,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -598,10 +593,15 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1818907698710624948, guid: 361da03ade5848c41b29663af784a1b4,
+    - target: {fileID: 1661729716917954761, guid: 361da03ade5848c41b29663af784a1b4,
         type: 3}
-      propertyPath: m_BehaviorType
-      value: 2
+      propertyPath: max_ball_speed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1661729716917954761, guid: 361da03ade5848c41b29663af784a1b4,
+        type: 3}
+      propertyPath: min_ball_speed
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1989970401020594516, guid: 361da03ade5848c41b29663af784a1b4,
         type: 3}
@@ -665,38 +665,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4647046236615945113, guid: 361da03ade5848c41b29663af784a1b4,
         type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4647046236615945113, guid: 361da03ade5848c41b29663af784a1b4,
-        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 19.2
+      value: 16.36
       objectReference: {fileID: 0}
     - target: {fileID: 4656066083302287733, guid: 361da03ade5848c41b29663af784a1b4,
         type: 3}
       propertyPath: m_Layer
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381350587997596647, guid: 361da03ade5848c41b29663af784a1b4,
-        type: 3}
-      propertyPath: enemy
-      value: 
-      objectReference: {fileID: 766667732}
-    - target: {fileID: 5381350587997596647, guid: 361da03ade5848c41b29663af784a1b4,
-        type: 3}
-      propertyPath: MaxStep
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381350587997596647, guid: 361da03ade5848c41b29663af784a1b4,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5381350587997596647, guid: 361da03ade5848c41b29663af784a1b4,
-        type: 3}
-      propertyPath: _isLearningMode
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7632575381666448703, guid: 361da03ade5848c41b29663af784a1b4,
         type: 3}
@@ -712,11 +687,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8911858725622856535, guid: 361da03ade5848c41b29663af784a1b4,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
