@@ -1,7 +1,5 @@
 using System.Collections.Generic;
 using System.IO;
-using PlasticGui.WorkspaceWindow.Items;
-using SkillSystem;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -9,9 +7,6 @@ using Object = UnityEngine.Object;
 public enum UtilType
 {
     Pool,
-    Item,
-    PowerUp,
-    Effect,
     Sound
 }
 
@@ -73,18 +68,6 @@ public partial class UtilityWindow : EditorWindow
             _poolTable = CreateAssetTable<PoolingTableSO>(_poolDirectory);
         }
 
-        if (_powerUpTable == null)
-        {
-            _powerUpTable = CreateAssetTable<PowerUpListSO>(_powerUpDirectory);
-        }
-
-        if (_effectTable == null)
-        {
-            _effectTable = CreateAssetTable<PowerUpEffectListSO>(_effectDirectory);
-        }
-
-
-
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
     }
@@ -121,12 +104,6 @@ public partial class UtilityWindow : EditorWindow
                 break;
             case 1:
                 DrawSoundItems();
-                break;
-            case 2:
-                DrawPowerUpItems();
-                break;
-            case 3:
-                DrawEffectItems();
                 break;
         }
     }

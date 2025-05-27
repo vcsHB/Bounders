@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using ObjectManage;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -82,6 +83,10 @@ namespace Pong
             if (collision.transform.CompareTag("Wall"))
             {
                 OnWallCollisionEvent?.Invoke();
+                if (collision.transform.TryGetComponent(out WallObject wall))
+                {
+                    wall.StartHitBlink(collision.GetContact(0).point);
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ namespace CameraControllers
         public void Initialize(CinemachineVirtualCamera camera)
         {
             _virtualCamera = camera;
-            _shaker = _virtualCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
+            _shaker = _virtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
 
         }
         public void HandleSmallShake()
