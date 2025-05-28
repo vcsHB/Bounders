@@ -1,12 +1,14 @@
 using Unity.MLAgents;
 using UnityEngine;
-using UnityEngine.Assertions.Must;
 
 namespace Pong
 {
 
     public class EnvController : MonoBehaviour
     {
+        [Header("Game Setting")]
+        [SerializeField] private float _leftEndPoint;
+        [SerializeField] private float _rightEndPoint;
         [Header("Agent Settings")]
         public GameObject Player1;
         public GameObject Player2;
@@ -26,11 +28,11 @@ namespace Pong
         void Update()
         {
             // 득점 처리 - x 좌표 기준
-            if (_ball.transform.localPosition.x < -12f)
+            if (_ball.transform.localPosition.x > _leftEndPoint)
             {
                 Player2Scored(); // 왼쪽 끝 → Player2 점수
             }
-            else if (_ball.transform.localPosition.x > 12f)
+            else if (_ball.transform.localPosition.x < _rightEndPoint)
             {
                 Player1Scored(); // 오른쪽 끝 → Player1 점수
             }
@@ -67,7 +69,7 @@ namespace Pong
             // 속도 초기화
             _ball.StopImmediately();
             _ball.SetRandomVelocity();
-            
+
             // 에이전트 리셋
             Player1.GetComponent<Agent>().EndEpisode();
             Player2.GetComponent<Agent>().EndEpisode();
@@ -87,7 +89,17 @@ namespace Pong
             //scoreManager.Player2Scored();
             ResetScene();
         }
-
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawLine(new Vector3(_leftEndPoint, 0f, 5f), new Vector3(_leftEndPoint, 0f, -5f));
+            
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawLine(new Vector3(_rightEndPoint, 0f, 5f), new Vector3(_rightEndPoint, 0f, -5f));
+            
+        }
+#endif
 
     }
 
