@@ -1,7 +1,7 @@
 using Unity.MLAgents;
 using UnityEngine;
 
-namespace Pong
+namespace PongGameSystem
 {
 
     public class EnvController : MonoBehaviour
@@ -21,9 +21,6 @@ namespace Pong
         public Vector3 player1StartPos;
         public Vector3 player2StartPos;
         public Vector3 ballStartPos;
-
-        // [Header("Score UI")]
-        // public SceneManager scoreManager;
 
         void Update()
         {
@@ -80,12 +77,14 @@ namespace Pong
 
         public void Player1Scored()
         {
+            ScoreManager.Instance.AddScore(PlayerType.Player1, 1);
             //scoreManager.Player1Scored();
             ResetScene();
         }
 
         public void Player2Scored()
         {
+            ScoreManager.Instance.AddScore(PlayerType.Player2, 1);
             //scoreManager.Player2Scored();
             ResetScene();
         }

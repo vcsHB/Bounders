@@ -4,7 +4,7 @@ using ObjectManage;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Pong
+namespace PongGameSystem
 {
 
     public class Ball : MonoBehaviour

@@ -1,5 +1,5 @@
 using UnityEngine;
-namespace Pong
+namespace PongGameSystem
 {
     public enum PlayerType
     {

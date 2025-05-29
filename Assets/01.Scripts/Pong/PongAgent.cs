@@ -3,7 +3,7 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 
-namespace Pong
+namespace PongGameSystem
 {
 
     public class PongAgent : Agent
