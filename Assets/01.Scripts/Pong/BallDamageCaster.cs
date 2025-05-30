@@ -11,7 +11,6 @@ namespace PongGameSystem
         private Collider[] _hits = new Collider[2];
         public bool CastDamage()
         {
-            print("asdasd");
             int amount = Physics.OverlapSphereNonAlloc(transform.position, _detectRadius, _hits, _targetLayer);
             for (int i = 0; i < amount; i++)
             {

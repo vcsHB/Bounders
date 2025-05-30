@@ -14,6 +14,7 @@ namespace Players
         [SerializeField] private float _currentHealth;
         [SerializeField] private float _maxHealth;
 
+        public float CurrentHealth => _currentHealth;
         public float MaxHealth => _maxHealth;
         private bool _isDead;
 
