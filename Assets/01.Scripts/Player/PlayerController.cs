@@ -6,13 +6,13 @@ namespace Players
 
     public class PlayerController : MonoBehaviour
     {
-        private Player _player;
+        private ControlablePlayer _player;
         [SerializeField] private Vector2 _zAxisClampRange;
         [SerializeField] private float _moveSpeed;
 
         private void Awake()
         {
-            _player = GetComponent<Player>();
+            _player = GetComponent<ControlablePlayer>();
         }
 
         private void FixedUpdate()

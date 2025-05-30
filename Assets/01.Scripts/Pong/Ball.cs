@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using ObjectManage;
 using UnityEngine;
 using UnityEngine.Events;
+
+using Random = UnityEngine.Random;
 
 namespace PongGameSystem
 {
 
     public class Ball : MonoBehaviour
     {
+        public Action OnPlayerCastedEvent;
         public UnityEvent OnWallCollisionEvent;
         [Header("Ball Settings")]
         public float min_ball_speed = 1.0f;
@@ -16,10 +18,13 @@ namespace PongGameSystem
 
         private Rigidbody _rigidCompo;
         public Vector2 Velocity => _rigidCompo.velocity;
+        private BallComboCounter _comboCounter;
+        private BallDamageCaster _caster;
 
         private void Awake()
         {
-
+            _comboCounter = GetComponent<BallComboCounter>();
+            _caster = GetComponentInChildren<BallDamageCaster>();
             _rigidCompo = GetComponent<Rigidbody>();
         }
 
@@ -29,8 +34,10 @@ namespace PongGameSystem
 
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
+            if (_caster.CastDamage())
+                OnPlayerCastedEvent?.Invoke();
             // 최소 속도 유지
             if (_rigidCompo.velocity.magnitude < 0.1f)
             {
@@ -55,6 +62,7 @@ namespace PongGameSystem
             {
                 ForceResetBall();
             }
+
         }
 
 
@@ -65,7 +73,7 @@ namespace PongGameSystem
 
             float xSign = Random.Range(0, 2) == 0 ? -1 : 1;
             float zSign = Random.Range(0, 2) == 0 ? -1 : 1;
-
+            _comboCounter.ResetCombo();
             _rigidCompo.velocity = new Vector3(xSign * xSpeed, 0f, zSign * zSpeed);
         }
 
@@ -86,7 +94,13 @@ namespace PongGameSystem
                 if (collision.transform.TryGetComponent(out WallObject wall))
                 {
                     wall.StartHitBlink(collision.GetContact(0).point);
+                    _comboCounter.AddCombo();
                 }
+            }
+            else if (collision.transform.CompareTag("PlayerPanel"))
+            {
+                _comboCounter.ResetCombo();
+
             }
         }
     }

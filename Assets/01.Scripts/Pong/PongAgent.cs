@@ -10,7 +10,7 @@ namespace PongGameSystem
     {
         public GameObject enemy;
         public GameObject ball;
-        private Rigidbody RbAgent;
+        private Rigidbody _rigidCompo;
         private Rigidbody RbBall;
 
         private const int Stay = 0;
@@ -23,7 +23,7 @@ namespace PongGameSystem
         public override void Initialize()
         {
             ResetPosAgent = transform.localPosition;
-            RbAgent = GetComponent<Rigidbody>();
+            _rigidCompo = GetComponent<Rigidbody>();
             RbBall = ball.GetComponent<Rigidbody>();
 
             if (_isLearningMode)
@@ -99,8 +99,8 @@ namespace PongGameSystem
         public override void OnEpisodeBegin()
         {
             transform.localPosition = ResetPosAgent;
-            RbAgent.velocity = Vector3.zero;
-            RbAgent.angularVelocity = Vector3.zero;
+            _rigidCompo.velocity = Vector3.zero;
+            _rigidCompo.angularVelocity = Vector3.zero;
         }
 
         public override void Heuristic(in ActionBuffers actionsOut)
