@@ -103,6 +103,11 @@ namespace PongGameSystem
 
             }
         }
+
+        public void SetPosition(Vector3 newPosition)
+        {
+            transform.position = newPosition;
+        }
     }
 
 }

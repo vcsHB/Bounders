@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace Core.GameSystem
 {
-
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoSingleton<GameManager>
     {
         [SerializeField] private ParticleSystem[] _defeatVFX;
         [SerializeField] private BattlePanel[] _winnerPanel;

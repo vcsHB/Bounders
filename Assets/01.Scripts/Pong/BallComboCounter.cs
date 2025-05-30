@@ -1,4 +1,5 @@
 using System;
+using ObjectManage;
 using UnityEngine;
 namespace PongGameSystem
 {
@@ -15,6 +16,8 @@ namespace PongGameSystem
         public void AddCombo(int amount = 1)
         {
             _currentCombo += amount;
+            ComboText comboText = PoolManager.Instance.Pop(ObjectPooling.PoolingType.ComboText) as ComboText;
+            comboText.SetComboText(transform.position, _currentCombo);
             OnComboValueChangedEvent?.Invoke(_currentCombo);
 
         }
