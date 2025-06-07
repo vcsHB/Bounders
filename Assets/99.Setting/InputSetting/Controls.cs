@@ -52,7 +52,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""06ca673e-68f2-4980-944e-827bc360fc5d"",
-                    ""path"": ""<Keyboard>/w"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";KeyboardMouse"",
@@ -63,7 +63,57 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""de2c1748-9087-47db-b7a8-cedac52a73ae"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                }
+            ]
+        },
+        {
+            ""name"": ""SecondPlayer"",
+            ""id"": ""7b827a1f-0d59-4052-8349-3ad2797ff1f3"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Value"",
+                    ""id"": ""3eed0296-025b-4f67-99fc-976f39aef0d1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""7ed31dc5-396c-4f72-a1e2-622bc57c0d7a"",
+                    ""path"": ""2DVector(mode=1)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""4a005579-bd68-47ab-b114-33945fd47b69"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";KeyboardMouse"",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""065100cf-c462-403d-84c0-dd19b9352807"",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";KeyboardMouse"",
@@ -96,11 +146,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        // SecondPlayer
+        m_SecondPlayer = asset.FindActionMap("SecondPlayer", throwIfNotFound: true);
+        m_SecondPlayer_Move = m_SecondPlayer.FindAction("Move", throwIfNotFound: true);
     }
 
     ~@Controls()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Controls.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_SecondPlayer.enabled, "This will cause a leak and performance issues, Controls.SecondPlayer.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -204,6 +258,52 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // SecondPlayer
+    private readonly InputActionMap m_SecondPlayer;
+    private List<ISecondPlayerActions> m_SecondPlayerActionsCallbackInterfaces = new List<ISecondPlayerActions>();
+    private readonly InputAction m_SecondPlayer_Move;
+    public struct SecondPlayerActions
+    {
+        private @Controls m_Wrapper;
+        public SecondPlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_SecondPlayer_Move;
+        public InputActionMap Get() { return m_Wrapper.m_SecondPlayer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SecondPlayerActions set) { return set.Get(); }
+        public void AddCallbacks(ISecondPlayerActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SecondPlayerActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SecondPlayerActionsCallbackInterfaces.Add(instance);
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
+        }
+
+        private void UnregisterCallbacks(ISecondPlayerActions instance)
+        {
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
+        }
+
+        public void RemoveCallbacks(ISecondPlayerActions instance)
+        {
+            if (m_Wrapper.m_SecondPlayerActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISecondPlayerActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SecondPlayerActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SecondPlayerActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SecondPlayerActions @SecondPlayer => new SecondPlayerActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -214,6 +314,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         }
     }
     public interface IPlayerActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+    }
+    public interface ISecondPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
     }
