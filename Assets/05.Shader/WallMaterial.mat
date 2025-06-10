@@ -47,9 +47,9 @@ Material:
     - _WaveTiling: 0.3
     - _WaveWidth: 0.5
     m_Colors:
-    - _DefaultColor: {r: 0.6226415, g: 0.6226415, b: 0.6226415, a: 0}
+    - _DefaultColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
     - _HitPosition: {r: -4.88, g: 0, b: -4.17, a: 0}
-    - _WaveColor: {r: 8.876644, g: 9.068457, b: 3.7508276, a: 0}
+    - _WaveColor: {r: 43.16024, g: 27.747696, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &1305705855063977777
 MonoBehaviour:
