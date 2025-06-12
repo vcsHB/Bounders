@@ -99,7 +99,7 @@ namespace PongGameSystem
             }
             else if (collision.transform.CompareTag("PlayerPanel"))
             {
-                _comboCounter.ResetCombo();
+                //_comboCounter.ResetCombo();
 
             }
         }

@@ -38,6 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DistanceRatio: 8
+    - _EdgeWidth: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _WaveLevel: 0
@@ -47,9 +49,9 @@ Material:
     - _WaveTiling: 0.3
     - _WaveWidth: 0.5
     m_Colors:
-    - _DefaultColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
+    - _DefaultColor: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 1}
     - _HitPosition: {r: -4.88, g: 0, b: -4.17, a: 0}
-    - _WaveColor: {r: 43.16024, g: 27.747696, b: 0, a: 0}
+    - _WaveColor: {r: 0.36287853, g: 0.23558605, b: 0, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &1305705855063977777
 MonoBehaviour:

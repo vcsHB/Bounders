@@ -22,7 +22,7 @@ TagManager:
   - Object
   - PlayerHitArea
   - TrainingCheckpoints
-  - 
+  - MainCamUI
   - 
   - 
   - 
@@ -45,4 +45,10 @@ TagManager:
     locked: 0
   - name: VFX
     uniqueID: 2086734413
+    locked: 0
+  - name: MainCamUI
+    uniqueID: 1946309719
+    locked: 0
+  - name: UI
+    uniqueID: 1629292851
     locked: 0
