@@ -6,6 +6,7 @@ namespace PongGameSystem
     public class GameModeSetter : MonoBehaviour
     {
         [SerializeField] private ObstacleData[] _obstacles;
+        [SerializeField] private PortalData[] _portals;
         [SerializeField] private Transform _secondPlayerTrm;
         [SerializeField] private Transform _AIPlayerTrm;
         [SerializeField] private float _enablePosition = -9.5f;
@@ -29,18 +30,20 @@ namespace PongGameSystem
                     break;
                 case GameDetailSettingEnum.Hard:
                     GenerateObstacle();
+                    GeneratePortal();
                     break;
                 case GameDetailSettingEnum.Original:
                     // DO nothing
                     break;
                 case GameDetailSettingEnum.Hell:
                     GenerateObstacle();
+                    GeneratePortal();
                     break;
                 case GameDetailSettingEnum.Obstacle:
                     GenerateObstacle();
                     break;
                 case GameDetailSettingEnum.Portal:
-
+                    GeneratePortal();
                     break;
             }
         }
@@ -62,6 +65,12 @@ namespace PongGameSystem
         {
             ObstacleData randomData = _obstacles[Random.Range(0, _obstacles.Length)];
             Instantiate(randomData.obstaclePrefab, _envTrm);
+        }
+
+        private void GeneratePortal()
+        {
+            PortalData randomData = _portals[Random.Range(0, _portals.Length)];
+            Instantiate(randomData.portalGroupPrefab, _envTrm);
         }
     }
 }

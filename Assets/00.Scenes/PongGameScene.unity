@@ -7286,6 +7286,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 21bff79c602d50b4c9fd27f9da8a0ba6, type: 2}
   - {fileID: 11400000, guid: 9a51bd35826d90346b6a7ebbbd03529a, type: 2}
   - {fileID: 11400000, guid: 1edb3a6dd9fbecd4db699cf4a01e7a3a, type: 2}
+  _portals:
+  - {fileID: 11400000, guid: 673540195b281a74b938f886b2411911, type: 2}
+  - {fileID: 11400000, guid: 3c290a2c6951440498facd18ec5fa561, type: 2}
+  - {fileID: 11400000, guid: 8145c5010be9e204cad860bb8959c17e, type: 2}
   _secondPlayerTrm: {fileID: 1444764979}
   _AIPlayerTrm: {fileID: 5969126914193029471}
   _enablePosition: -9.5
