@@ -1,3 +1,4 @@
+using PongGameSystem;
 using UIManage.GameScene;
 using UnityEngine;
 
@@ -8,11 +9,16 @@ namespace Core.GameSystem
         PVE,
         PVP
     }
-    public enum GameDifficultyEnum
+    public enum GameDetailSettingEnum
     {
         Easy,
         Normal,
-        Hard
+        Hard,
+        Original,
+        Hell,
+        Obstacle,
+        Portal
+        
     }
     public class GameManager : MonoSingleton<GameManager>
     {
@@ -20,6 +26,7 @@ namespace Core.GameSystem
         [SerializeField] private GameTypeEnum _currentGameType;
         [SerializeField] private ParticleSystem[] _defeatVFX;
         [SerializeField] private BattlePanel[] _winnerPanel;
+        [SerializeField] private GameUIController _gameUIController;
         [SerializeField] private bool _isGameOver;
 
         public void HandlePlayerDie(int index)
@@ -31,8 +38,9 @@ namespace Core.GameSystem
         }
 
 
-        private void HandleSetGameType(GameTypeEnum gameType)
+        private void SetGameSetting(GamePlayData playData)
         {
+            _gameUIController.SetGameView(playData.gameType);
             
         }
     }
