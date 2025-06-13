@@ -32,7 +32,7 @@ namespace UIManage
             OnCloseEvent?.Invoke();
         }
 
-        public void SetCanvasActive(bool value)
+        public virtual void SetCanvasActive(bool value)
         {
             _canvasGroup.DOFade(value ? 1f : 0f, _activeDuration).SetUpdate(_useUnscaledTime).OnComplete(() => _isActive = value);
             SetInteractable(value);

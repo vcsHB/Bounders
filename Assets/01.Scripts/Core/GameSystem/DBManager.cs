@@ -1,11 +1,11 @@
-﻿using System.IO;
+using System.IO;
 using PongGameSystem;
 using UnityEngine;
 
 namespace Core.DataManage
 {
 
-    public class DBManager
+    public static class DBManager
     {
         private static string LOCALPATH = Application.dataPath + "/SaveData";
         private static string PlayDataSaveFileName = "PlayData.json";
@@ -36,7 +36,7 @@ namespace Core.DataManage
 
         }
 
-        public static GamePlayData GetStageData()
+        public static GamePlayData GetGameData()
         {
             CheckLocalPath();
             string path = Path.Combine(LOCALPATH, PlayDataSaveFileName);
@@ -47,14 +47,14 @@ namespace Core.DataManage
             }
 
             GamePlayData newData = new GamePlayData();
-            SaveStageData(newData);
+            SavePlayData(newData);
             return newData;
         }
 
-        public static void SaveStageData(GamePlayData stage)
+        public static void SavePlayData(GamePlayData data)
         {
             CheckLocalPath();
-            string json = JsonUtility.ToJson(stage, true);
+            string json = JsonUtility.ToJson(data, true);
             string path = Path.Combine(LOCALPATH, PlayDataSaveFileName);
             File.WriteAllText(path, json);
 

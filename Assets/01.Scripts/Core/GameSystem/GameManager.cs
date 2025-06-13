@@ -1,3 +1,4 @@
+using Core.DataManage;
 using PongGameSystem;
 using UIManage.GameScene;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace Core.GameSystem
         Hell,
         Obstacle,
         Portal
-        
+
     }
     public class GameManager : MonoSingleton<GameManager>
     {
@@ -27,7 +28,25 @@ namespace Core.GameSystem
         [SerializeField] private ParticleSystem[] _defeatVFX;
         [SerializeField] private BattlePanel[] _winnerPanel;
         [SerializeField] private GameUIController _gameUIController;
+        [SerializeField] private GameModeSetter _modeSetter;
         [SerializeField] private bool _isGameOver;
+        private GamePlayData _gameData;
+        protected override void Awake()
+        {
+            base.Awake();
+            _gameData = DBManager.GetGameData();
+            _modeSetter.InitGameSet(_gameData);
+        }
+        private void Start()
+        {
+            SetGameSetting(_gameData);
+
+
+        }
+
+
+
+
 
         public void HandlePlayerDie(int index)
         {
@@ -41,7 +60,7 @@ namespace Core.GameSystem
         private void SetGameSetting(GamePlayData playData)
         {
             _gameUIController.SetGameView(playData.gameType);
-            
+
         }
     }
 

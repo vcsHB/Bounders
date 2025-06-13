@@ -20,11 +20,14 @@ namespace PongGameSystem
         private Vector3 ResetPosAgent;
         [SerializeField] private bool _isLearningMode;
 
-        public override void Initialize()
+        private void Start()
         {
             ResetPosAgent = transform.localPosition;
             _rigidCompo = GetComponent<Rigidbody>();
             RbBall = ball.GetComponent<Rigidbody>();
+        }
+        public override void Initialize()
+        {
 
             if (_isLearningMode)
                 Academy.Instance.AgentPreStep += WaitTimeInference;
