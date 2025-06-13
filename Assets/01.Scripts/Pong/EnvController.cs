@@ -1,7 +1,6 @@
-using System;
 using System.Collections;
+using Core.GameSystem;
 using ObjectManage;
-using Unity.MLAgents;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -33,13 +32,8 @@ namespace PongGameSystem
             VFXPlayer vfx = PoolManager.Instance.Pop(ObjectPooling.PoolingType.BallDestroyVFX) as VFXPlayer;
             vfx.transform.position = _ball.transform.position;
             vfx.Play();
-            ResetGame();
-            
-        }
-        private IEnumerator BallCastedRoutine()
-        {
-            _ball.SetPosition(new Vector3(100f, 100f, 100f));
-            yield return new WaitForSeconds(0.4f);
+            _ball.transform.position = new Vector3(100f, 0f, 0f); // Out
+            GameManager.Instance.GameStart(ResetGame);
         }
 
 
@@ -59,6 +53,8 @@ namespace PongGameSystem
 
             // 리셋용 타이머 초기화
         }
+
+        
 
 
 

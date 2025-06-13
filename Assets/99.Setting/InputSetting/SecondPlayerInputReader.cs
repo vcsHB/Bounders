@@ -23,6 +23,7 @@ namespace Core.InputSystem
 
         public void OnMove(InputAction.CallbackContext context)
         {
+            if (!CanControl) return;
             if (context.performed)
                 CurrentMoveDirection = context.ReadValue<Vector2>();
             else if (context.canceled)
