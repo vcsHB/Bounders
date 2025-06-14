@@ -6,6 +6,7 @@ namespace PongGameSystem
     public class BallDamageCaster : MonoBehaviour
     {
         [SerializeField] private BallComboCounter _comboCounter;
+        
         [SerializeField] private float _detectRadius = 0.5f;
         [SerializeField] private LayerMask _targetLayer;
         private Collider[] _hits = new Collider[2];

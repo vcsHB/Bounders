@@ -1,6 +1,7 @@
 using System.Collections;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace UIManage.GameScene
@@ -8,6 +9,7 @@ namespace UIManage.GameScene
 
     public class BattlePanel : MonoBehaviour, IWindowPanel
     {
+        public UnityEvent OnPanelOpenEvent;
         [SerializeField] private BattleProfilePanel _profilePanel;
         [SerializeField] private float _enabledSize;
         [SerializeField] private Image _backgroundPanel;
@@ -67,6 +69,8 @@ namespace UIManage.GameScene
                 {
                     _profilePanel.Open();
                 });
+
+            OnPanelOpenEvent?.Invoke();
         }
 
 

@@ -10,6 +10,8 @@ namespace PongGameSystem
 
     public class Ball : MonoBehaviour
     {
+        public UnityEvent OnBlastModeEnableEvent;
+        public UnityEvent OnBlastModeDisableEvent;
         public Action OnPlayerCastedEvent;
         public UnityEvent OnWallCollisionEvent;
         [Header("Ball Settings")]
@@ -20,6 +22,8 @@ namespace PongGameSystem
         public Vector2 Velocity => _rigidCompo.velocity;
         private BallComboCounter _comboCounter;
         private BallDamageCaster _caster;
+        public bool isBallEnable;
+        private bool _isBlastBall;
 
         private void Awake()
         {
@@ -36,8 +40,14 @@ namespace PongGameSystem
 
         private void FixedUpdate()
         {
+            if (!isBallEnable) return;
+
+
             if (_caster.CastDamage())
+            {
                 OnPlayerCastedEvent?.Invoke();
+                isBallEnable = false;
+            }
             // 최소 속도 유지
             if (_rigidCompo.velocity.magnitude < 0.1f)
             {
@@ -51,7 +61,7 @@ namespace PongGameSystem
             }
 
             // 벽에 평행하게 계속 튕기는 현상 방지
-            if (Mathf.Abs(_rigidCompo.velocity.z) < 0.3f)
+            if (!_isBlastBall && Mathf.Abs(_rigidCompo.velocity.z) < 0.3f)
             {
                 float randZ = Random.Range(0, 2) == 0 ? -1 : 1;
                 _rigidCompo.velocity = new Vector3(_rigidCompo.velocity.x, 0, randZ * min_ball_speed);
@@ -88,6 +98,11 @@ namespace PongGameSystem
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (_isBlastBall)
+            {
+                _isBlastBall = false;
+                OnBlastModeDisableEvent?.Invoke();
+            }
             if (collision.transform.CompareTag("Wall"))
             {
                 OnWallCollisionEvent?.Invoke();
@@ -104,6 +119,14 @@ namespace PongGameSystem
             }
         }
 
+        public void ShootBlast(Vector2 direction)
+        {
+            direction.Normalize();
+            _isBlastBall = true;
+            isBallEnable = true;
+            _rigidCompo.velocity = direction * max_ball_speed;
+            OnBlastModeEnableEvent?.Invoke();
+        }
         public void SetPosition(Vector3 newPosition)
         {
             transform.position = newPosition;

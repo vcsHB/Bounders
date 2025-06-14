@@ -5,6 +5,7 @@ using Core.InputSystem;
 using PongGameSystem;
 using UIManage.GameScene;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Core.GameSystem
 {
@@ -32,14 +33,17 @@ namespace Core.GameSystem
         [SerializeField] private BattlePanel[] _winnerPanel;
         [SerializeField] private GameUIController _gameUIController;
         [SerializeField] private GameModeSetter _modeSetter;
+        [SerializeField] private AttackOrderController _orderController;
         [SerializeField] private bool _isGameOver;
         [SerializeField] private float _waitTerm = 2f;
         private GamePlayData _gameData;
+        private int _currentOrderId;
         protected override void Awake()
         {
             base.Awake();
             _gameData = DBManager.GetGameData();
             _modeSetter.InitGameSet(_gameData);
+            _orderController.SetGameMode(_gameData.gameType);
         }
         private void Start()
         {
@@ -62,9 +66,14 @@ namespace Core.GameSystem
 
         }
 
-        public void GameStart(Action resetEvent = null)
+        public void GameStart(int orderId)
         {
-            StartCoroutine(GameTermCoroutine(resetEvent));
+            _currentOrderId = orderId;
+            StartCoroutine(GameTermCoroutine(HandleSetPlayerBall));
+        }
+        private void HandleSetPlayerBall()
+        {
+            _orderController.SetBallOwner(_currentOrderId);
         }
 
         private IEnumerator GameTermCoroutine(Action resetEvent)
@@ -75,6 +84,10 @@ namespace Core.GameSystem
 
         }
 
+        public void MoveToTitle()
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
 
     }
 

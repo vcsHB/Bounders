@@ -1,5 +1,3 @@
-using System.Collections;
-using Core.GameSystem;
 using ObjectManage;
 using UnityEngine;
 using UnityEngine.Events;
@@ -33,7 +31,6 @@ namespace PongGameSystem
             vfx.transform.position = _ball.transform.position;
             vfx.Play();
             _ball.transform.position = new Vector3(100f, 0f, 0f); // Out
-            GameManager.Instance.GameStart(ResetGame);
         }
 
 
