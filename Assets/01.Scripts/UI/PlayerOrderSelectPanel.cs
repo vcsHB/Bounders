@@ -37,5 +37,11 @@ namespace UIManage.GameScene
             Close();
             GameManager.Instance.GameStart(_selectedOrderID);
         }
+
+        public void HandleRandomSelect()
+        {
+            
+            HandleSelectButton(UnityEngine.Random.Range(0, 2));
+        }
     }
 }

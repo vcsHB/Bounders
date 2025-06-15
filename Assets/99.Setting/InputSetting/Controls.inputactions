@@ -100,6 +100,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "33d4197c-c755-4a9e-80c8-95a1483590d3",
+            "actions": [
+                {
+                    "name": "Esc",
+                    "type": "Button",
+                    "id": "b60e74ca-a9bd-431d-bef5-9a6322f2d305",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "56f23a60-5156-4fdb-a87f-c7a0b2dbc0f2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";KeyboardMouse",
+                    "action": "Esc",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
