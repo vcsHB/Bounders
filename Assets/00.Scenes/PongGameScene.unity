@@ -13321,6 +13321,9 @@ MonoBehaviour:
   _enablePosition: -9.5
   _disablePosition: -20
   _envTrm: {fileID: 582589518416631485}
+  _secondPlayerNameTexts:
+  - {fileID: 1468766726}
+  - {fileID: 245253813}
 --- !u!1 &637811175
 GameObject:
   m_ObjectHideFlags: 0
@@ -19212,7 +19215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _directionInverter: 1
   _zAxisClampRange: {x: -3.5, y: 3.5}
-  _moveSpeed: -28
+  _moveSpeed: -20
 --- !u!114 &766667739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37546,7 +37549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _directionInverter: -1
   _zAxisClampRange: {x: -3.5, y: 3.5}
-  _moveSpeed: -28
+  _moveSpeed: -20
 --- !u!114 &1444764982
 MonoBehaviour:
   m_ObjectHideFlags: 0
